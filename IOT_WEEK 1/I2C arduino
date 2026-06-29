@@ -1,0 +1,29 @@
+#include <Wire.h>
+
+const int led = 13;
+
+void setup()
+{
+  pinMode(led, OUTPUT);
+
+  Wire.begin(8);
+
+  Wire.onReceive(receiveEvent);
+}
+
+void loop()
+{
+}
+
+void receiveEvent(int howMany)
+{
+  while(Wire.available())
+  {
+    int x = Wire.read();
+
+    if(x == 1)
+    {
+      digitalWrite(led, HIGH);
+    }
+  }
+}
